@@ -105,5 +105,27 @@ namespace SecurityWebsite.Controllers
 
             return RedirectToAction("Index");//return to main list
         }
+
+
+        public ActionResult Download(int id)
+        {
+            Item item = new ItemsBL().GetItem(id);
+
+            if (item.ImagePath != null)
+            {
+                string abolutePath = Server.MapPath(item.ImagePath);
+
+                if (System.IO.File.Exists(abolutePath))
+                {
+                    byte[] data = System.IO.File.ReadAllBytes(abolutePath);
+
+                    return File(data, System.Net.Mime.MediaTypeNames.Application.Octet,
+                                    Path.GetFileName(item.ImagePath));
+                }
+                else return null;
+            }
+            else return null;
+            
+        }
     }
 }
