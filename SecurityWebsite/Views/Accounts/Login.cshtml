@@ -1,0 +1,19 @@
+﻿
+@{
+    ViewBag.Title = "Login";
+}
+
+<h2>Login</h2>
+
+<form method="post" action="\Accounts\Login">
+    @Html.AntiForgeryToken()
+    
+    <table>
+        <tr><td>Email</td><td><input type="email" name="email" class="form-control" /></td></tr>
+        <tr><td>Password</td><td><input type="password" name="password" class="form-control" /></td></tr>
+    </table>
+
+    <input type="submit" value="Log in" class="btn btn-primary" />
+
+</form>
+
