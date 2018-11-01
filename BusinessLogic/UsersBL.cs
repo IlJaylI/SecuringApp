@@ -29,5 +29,10 @@ namespace BusinessLogic
                    
                     //if blocked return false
         }
+
+        public IQueryable<Role> GetRolesOfUser(string email)
+        {
+            return new UsersRepository().GetRolesOfUser(email);
+        }
     }
 }

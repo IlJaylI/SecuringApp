@@ -20,6 +20,11 @@ namespace ClassLibrary1
                 return true;
         }
 
+        public IQueryable<Role> GetRolesOfUser(string email)
+        {
+            return Entity.Users.SingleOrDefault(x => x.Email == email).Roles.AsQueryable();
+        }
+
         /*
         public void IncrementNoOfAttempts(string email)
         { }
