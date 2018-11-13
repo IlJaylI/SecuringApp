@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
+using Common;
 
 namespace SecurityWebsite.Controllers
 {
@@ -20,6 +21,7 @@ namespace SecurityWebsite.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Login(string email, string password)
         {
+            try { 
             UsersBL u = new UsersBL();
             if(u.Login(email,password))
             {
@@ -37,7 +39,26 @@ namespace SecurityWebsite.Controllers
                 TempData["ErrorMessage"] = "Login Failed";
                 return View();
             }
+            }
+            catch(CustomException ex)
+            {
+                TempData["ErrorMessage"] = ex.Message;
+                return View();
+            }
+            catch (Exception ex)
+            {
+                //log message
+                Logger.Log("guest", Request.Path, ex.Message);
+                TempData["ErrorMessage"] = "Error has occured.We are investigating. Try again later...";
+                return View();
 
+            }
+        }
+
+        public ActionResult Signout()
+        {
+            FormsAuthentication.SignOut();
+            return RedirectToAction("Login");
         }
     }
 }

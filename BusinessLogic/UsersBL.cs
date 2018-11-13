@@ -12,8 +12,16 @@ namespace BusinessLogic
     {
         public bool Login(string email, string password)
         {
-            return new UsersRepository().Login(email, password);
-
+            
+            UsersRepository ur = new UsersRepository();
+            if(ur.IsUserBlocked(email))
+            {
+                throw new CustomException("Your Account is blocked. Please contact admin");
+            }
+            else
+            {
+                return new UsersRepository().Login(email, password);
+            }
             //IsUserBlocked
                 //if not 
                 //check username and password
@@ -33,6 +41,11 @@ namespace BusinessLogic
         public IQueryable<Role> GetRolesOfUser(string email)
         {
             return new UsersRepository().GetRolesOfUser(email);
+        }
+
+        public User GetUser(string email)
+        {
+            return new UsersRepository().GetUser(email);
         }
     }
 }

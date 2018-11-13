@@ -114,6 +114,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Views\Shared\ErrorPage.html" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -137,6 +138,7 @@
     <Content Include="Views\Items\Details.cshtml" />
     <Content Include="Views\Items\Create.cshtml" />
     <Content Include="Views\Accounts\Login.cshtml" />
+    <Content Include="Views\Shared\PartialLoginControl.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

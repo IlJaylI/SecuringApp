@@ -1,0 +1,14 @@
+﻿@if(Context.User.Identity.IsAuthenticated == false)
+{
+    //user has not logged in yet
+    <label>Welcome Guest</label>
+}
+else
+{
+    var myUser = new BusinessLogic.UsersBL().GetUser(Context.User.Identity.Name);
+    
+    <label>Welcome @myUser.FirstName</label>
+    
+    
+    <a href="\Accounts\Signout">Sign out</a>
+}

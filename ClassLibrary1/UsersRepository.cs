@@ -34,12 +34,15 @@ namespace ClassLibrary1
 
         public void ResetNoOfAttempts(string email)
         {}
-
-        public User GetUser(string email)
-        { }
-
-        public bool IsUserBlocked(string email)
-        { }
         */
+
+        public User GetUser(string email){
+            return Entity.Users.SingleOrDefault(x => x.Email == email);
+        }
+        
+        public bool IsUserBlocked(string email){
+            return GetUser(email).Blocked;
+        }
+        
     }
 }
