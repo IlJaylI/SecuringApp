@@ -39,6 +39,14 @@ namespace ClassLibrary1
         public User GetUser(string email){
             return Entity.Users.SingleOrDefault(x => x.Email == email);
         }
+
+        public void AddUser(User u)
+        {
+            Entity.Users.Add(u);
+            Entity.SaveChanges();
+        }
+
+      
         
         public bool IsUserBlocked(string email){
             return GetUser(email).Blocked;

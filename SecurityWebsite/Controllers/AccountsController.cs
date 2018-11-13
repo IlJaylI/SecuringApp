@@ -60,5 +60,34 @@ namespace SecurityWebsite.Controllers
             FormsAuthentication.SignOut();
             return RedirectToAction("Login");
         }
+
+        [HttpGet]
+        public ActionResult Register()
+        { return View(); }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Register(User u)
+        {
+            try
+            {
+                new UsersBL().Register(u);
+                TempData["message"] = "Registeration succesful";
+            }
+            catch (CustomException ex)
+            {
+                TempData["errormessage"] = ex.Message;
+            }
+            catch (Exception ex)
+            {
+                Logger.Log("guest", Request.Path, ex
+                    .Message);
+                TempData["errormessage"] = "Registeration Failed";
+
+            }
+
+            return View(u);
+        }
     }
 }

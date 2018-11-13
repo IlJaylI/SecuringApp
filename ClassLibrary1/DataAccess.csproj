@@ -52,6 +52,7 @@
     <Compile Include="ConnectiomClass.cs" />
     <Compile Include="ItemsRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RolesRepository.cs" />
     <Compile Include="UsersRepository.cs" />
   </ItemGroup>
   <ItemGroup>

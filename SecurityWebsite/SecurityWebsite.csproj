@@ -139,6 +139,7 @@
     <Content Include="Views\Items\Create.cshtml" />
     <Content Include="Views\Accounts\Login.cshtml" />
     <Content Include="Views\Shared\PartialLoginControl.cshtml" />
+    <Content Include="Views\Accounts\Register.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

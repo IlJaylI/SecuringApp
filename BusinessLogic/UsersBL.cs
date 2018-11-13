@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Transactions;
 using ClassLibrary1;
 using Common;
 
@@ -46,6 +47,36 @@ namespace BusinessLogic
         public User GetUser(string email)
         {
             return new UsersRepository().GetUser(email);
+        }
+
+        public void Register(User u)
+        {
+            UsersRepository ur = new UsersRepository();
+            RolesRepository rr = new RolesRepository();
+            ur.Entity = rr.Entity;//avoid an error of mvc not allowed to edit "different" entities
+
+            //distributed transactions Add reference(system.transactions)
+
+            using (TransactionScope ts = new TransactionScope())
+            {
+                if (ur.GetUser(u.Email) == null)
+                {
+                    //used to generate the a new guid for every user
+                    u.Id = Guid.NewGuid();//not set to increment
+                    ur.AddUser(u);
+
+                    var role = rr.GetRole(1);
+                    rr.AllocateRoleToUser(u, role);
+
+                }
+                else
+                {
+                    throw new CustomException("Email is already taken.");
+                }
+
+                ts.Complete();//confirming the succesfull transaction 
+            }//if something goes wrong it exists the transaction and the database will not be affected
+
         }
     }
 }
