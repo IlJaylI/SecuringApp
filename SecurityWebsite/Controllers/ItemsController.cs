@@ -16,7 +16,7 @@ namespace SecurityWebsite.Controllers
         [Authorize(Roles = "Admin")]//only authenticated ppl can access the method will be redirected to login
         public ActionResult Index()
         {
-            ItemsBL myItems = new ItemsBL();
+            ItemsBL myItems = new ItemsBL();//user.IsInRole("admin");in parameters to allowpermissions
             var list = myItems.GetItems().ToList();
 
             return View(list);

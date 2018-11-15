@@ -12,6 +12,8 @@ namespace ClassLibrary1
         public ItemsRepository():base()
         {}//intialises the connection using the base class method neccesary for all repos
 
+        public ItemsRepository(bool isAdmin):base(isAdmin)
+        { }
 
         #region Select
         public Item GetItem(int id)

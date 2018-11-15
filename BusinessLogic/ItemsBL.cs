@@ -11,9 +11,19 @@ namespace BusinessLogic
     public class ItemsBL
     {
 
+        /*
+         * ItemsRepository  ir = new itemsrepository(false);
+         * public itemsBL(bool isAdmin){
+         * ir=new itemsRepositroy(isadmin);
+         * }
+         * 
+         * then use the secure instance ir rather than itemrepo everytime 
+             */
+
         public  IQueryable<Item> GetItems()
         {
-            return new ItemsRepository().GetItems();
+            return new ItemsRepository(false).GetItems();
+            //everyone can use this as such keep the access to a minium
         }
 
         public Item GetItem(int id)
