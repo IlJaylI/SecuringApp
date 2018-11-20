@@ -21,7 +21,7 @@ namespace BusinessLogic
             }
             else
             {
-                return new UsersRepository().Login(email, password);
+                return new UsersRepository().Login(email, Encryption.HashPassword(password));
             }
             //IsUserBlocked
                 //if not 
@@ -63,6 +63,7 @@ namespace BusinessLogic
                 {
                     //used to generate the a new guid for every user
                     u.Id = Guid.NewGuid();//not set to increment
+                    u.Password = Encryption.HashPassword(u.Password);
                     ur.AddUser(u);
 
                     var role = rr.GetRole(1);

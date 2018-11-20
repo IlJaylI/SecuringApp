@@ -10,7 +10,7 @@ namespace Common
     public class Encryption
     {
         //Hasshing - one way only 
-        public string HashPassword(string pass)
+        public static string HashPassword(string pass)
         {
             //converting to bytes
             byte[] Bytespass =Encoding.UTF8.GetBytes(pass);
