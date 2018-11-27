@@ -64,6 +64,10 @@ namespace BusinessLogic
                     //used to generate the a new guid for every user
                     u.Id = Guid.NewGuid();//not set to increment
                     u.Password = Encryption.HashPassword(u.Password);
+                    var keys = Encryption.GenerateAsymeticKeys();
+                    u.PublicKey = keys.PublicKey;
+                    u.PrivateKey = keys.PrivateKey;
+
                     ur.AddUser(u);
 
                     var role = rr.GetRole(1);

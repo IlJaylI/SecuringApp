@@ -22,12 +22,24 @@ namespace SecurityWebsite.Controllers
             return View(list);
         }
 
-        public ActionResult Details(int id)
+        public ActionResult Details(string id)
         {
-            ItemsBL myItems = new ItemsBL();
-            var item = myItems.GetItem(id);
+            try
+            {
+                var orginalValue = Encryption.DecryptQueryString(id);
 
-            return View(item);
+                ItemsBL myItems = new ItemsBL();
+                var item = myItems.GetItem(Convert.ToInt32(orginalValue));
+
+                return View(item);
+            }
+            catch
+            {
+                TempData["errormessage"] = "Acces denied or value invalid";
+
+
+                return RedirectToAction("Index");
+            }
         }
 
         //[HttpGet] the opposite of post used if post isnt present

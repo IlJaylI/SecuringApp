@@ -25,8 +25,10 @@ namespace Common
         public string Password { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public Nullable<int> NoOfAttempts { get; set; }
-        public Nullable<bool> Blocked { get; set; }
+        public int NoOfAttempts { get; set; }
+        public bool Blocked { get; set; }
+        public string PublicKey { get; set; }
+        public string PrivateKey { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Role> Roles { get; set; }
