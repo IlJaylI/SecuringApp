@@ -75,8 +75,14 @@ namespace SecurityWebsite.Controllers
 
                         //I:\Securing Application\SecuringApp\SecurityWebsite\Images
                         string absolutePath = Server.MapPath(@"\Images") + @"\";//this is returns the absolute path of the local images folder thus creating the needed pat to save the new image
-                        fileData.SaveAs(absolutePath + uniqueFilename);//saving the image
+                                                                                //fileData.SaveAs(absolutePath + uniqueFilename);//saving the image revomed due to encryption
 
+                        //var user = new UserBL().getUser(User.identitiy.name);
+                        //MemoryStream msEncrypted = Encryption.HybridEncrypt(fileData.InputStream, publickey);
+                       //System.IO.File.WriteAllBytes(abolutepath + uniquefilename);
+
+
+                        //filedata.SaveAs(abolutepath +uniquefilename)
                         i.ImagePath = @"\Images\" + uniqueFilename;
                         //<img src="" only requires relative therefore no use in saving the entire image string path into the db
 
@@ -130,6 +136,16 @@ namespace SecurityWebsite.Controllers
                 if (System.IO.File.Exists(abolutePath))
                 {
                     byte[] data = System.IO.File.ReadAllBytes(abolutePath);
+
+                    MemoryStream msIn = new MemoryStream(data);
+                    msIn.Position = 0;
+
+                    //var audiofilerecord = new audiobl().getaudioid(id);
+                    //var user = new UserBL.getUser();
+
+                    //MemoryStream msDecrypted = Encryption.HybridDecrypt(msIn, user.PrivateKey);
+                    //return File(msDecryped.toArray(), System.Net.Mime.MediaTypeNames.Application.Octet,
+                    //Path.GetFileName(item.ImagePath));
 
                     return File(data, System.Net.Mime.MediaTypeNames.Application.Octet,
                                     Path.GetFileName(item.ImagePath));
