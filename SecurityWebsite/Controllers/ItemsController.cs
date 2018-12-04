@@ -81,8 +81,10 @@ namespace SecurityWebsite.Controllers
                         //MemoryStream msEncrypted = Encryption.HybridEncrypt(fileData.InputStream, publickey);
                        //System.IO.File.WriteAllBytes(abolutepath + uniquefilename);
 
+                        //call the signdata here by also getting the user.privatekey
+                        //remeber to store the signature in the i.signature
 
-                        //filedata.SaveAs(abolutepath +uniquefilename)
+                        //filedata.SaveAs(abolutepath +uniquefilename) line decremented
                         i.ImagePath = @"\Images\" + uniqueFilename;
                         //<img src="" only requires relative therefore no use in saving the entire image string path into the db
 
@@ -142,6 +144,11 @@ namespace SecurityWebsite.Controllers
 
                     //var audiofilerecord = new audiobl().getaudioid(id);
                     //var user = new UserBL.getUser();
+
+                    //call the verifydata passing the signature retrieved from the audiofilerecord.signature,user.publickey
+                    //and pass the msIn.ToArray();
+
+                    //if the output of the verifydata method is false stop the dowload
 
                     //MemoryStream msDecrypted = Encryption.HybridDecrypt(msIn, user.PrivateKey);
                     //return File(msDecryped.toArray(), System.Net.Mime.MediaTypeNames.Application.Octet,

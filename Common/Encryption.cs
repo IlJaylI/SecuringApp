@@ -229,7 +229,29 @@ namespace Common
             return decryptedFile;
         }
 
+        //In database you have a new column of type text where to store the signature in the audios table 
 
+        public string SignData(byte[] input, string privatekey)
+        {
+            RSA alg = RSA.Create(); //same algorithm used for asymetric encyption
+            alg.FromXmlString(privatekey);
+
+           byte[] signature = alg.SignData(input, new HashAlgorithmName("SHA512"), RSASignaturePadding.Pss);
+
+            return Convert.ToBase64String(signature);
+        }
+
+        public bool VerifyData(byte[] input, string publickey,string signature)
+        {
+            RSA alg = RSA.Create(); //same algorithm used for asymetric encyption
+            alg.FromXmlString(publickey);
+
+            bool result = alg.VerifyData(input,Convert.FromBase64String(signature), new HashAlgorithmName("SHA512"), RSASignaturePadding.Pss);
+            //true data was not changed
+            //false data was changed
+
+            return result;
+        }
     }
 
     public class AsymetricKeys
