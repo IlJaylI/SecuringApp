@@ -75,7 +75,8 @@ namespace SecurityWebsite.Controllers
 
                         //I:\Securing Application\SecuringApp\SecurityWebsite\Images
                         string absolutePath = Server.MapPath(@"\Images") + @"\";//this is returns the absolute path of the local images folder thus creating the needed pat to save the new image
-                                                                                //fileData.SaveAs(absolutePath + uniqueFilename);//saving the image revomed due to encryption
+                                                                                
+                        //fileData.SaveAs(absolutePath + uniqueFilename);//saving the image revomed due to encryption
 
                         //var user = new UserBL().getUser(User.identitiy.name);
                         //MemoryStream msEncrypted = Encryption.HybridEncrypt(fileData.InputStream, publickey);

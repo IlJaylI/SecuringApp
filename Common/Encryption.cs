@@ -133,7 +133,8 @@ namespace Common
         //Asymmetrix Encryption->
         public static AsymetricKeys GenerateAsymeticKeys()
         {
-            RSA myAlg = RSA.Create(); //DSA
+
+            RSACryptoServiceProvider myAlg = new RSACryptoServiceProvider(); //DSA
 
             AsymetricKeys keys = new AsymetricKeys();
             keys.PublicKey = myAlg.ToXmlString(false);
@@ -144,7 +145,7 @@ namespace Common
 
         public static byte[] AsymmeticallyEncrypt(byte[] input, string publicKey)
         {
-            var rsa = RSA.Create();//same algorithm used in asymetric
+            RSACryptoServiceProvider rsa = new RSACryptoServiceProvider();//same algorithm used in asymetric
             rsa.FromXmlString(publicKey);
 
             //if you need to convert input from a string you use encoding utf8.getBytes
@@ -156,7 +157,7 @@ namespace Common
 
         public static byte[] AsymmeticallyDerypt(byte[] input, string privateKey)
         {
-            var rsa = RSA.Create();//same algorithm used in asymetric
+            RSACryptoServiceProvider rsa = new RSACryptoServiceProvider();//same algorithm used in asymetric
             rsa.FromXmlString(privateKey);
 
             //if you need to convert input from a string you use encoding utf8.getBytes
@@ -233,7 +234,7 @@ namespace Common
 
         public string SignData(byte[] input, string privatekey)
         {
-            RSA alg = RSA.Create(); //same algorithm used for asymetric encyption
+            RSACryptoServiceProvider alg = new RSACryptoServiceProvider(); //same algorithm used for asymetric encyption
             alg.FromXmlString(privatekey);
 
            byte[] signature = alg.SignData(input, new HashAlgorithmName("SHA512"), RSASignaturePadding.Pss);
@@ -243,7 +244,7 @@ namespace Common
 
         public bool VerifyData(byte[] input, string publickey,string signature)
         {
-            RSA alg = RSA.Create(); //same algorithm used for asymetric encyption
+            RSACryptoServiceProvider alg = new RSACryptoServiceProvider(); //same algorithm used for asymetric encyption
             alg.FromXmlString(publickey);
 
             bool result = alg.VerifyData(input,Convert.FromBase64String(signature), new HashAlgorithmName("SHA512"), RSASignaturePadding.Pss);
